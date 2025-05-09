@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.Controls.MenuItemView"
+             x:Name="this">
+    <Frame BackgroundColor="White"
+           CornerRadius="10"
+           HasShadow="True"
+           Padding="15"
+           Margin="0,5">
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Text="{Binding Source={x:Reference this}, Path=Name}"
+                   FontSize="16"
+                   TextColor="#3E2723"/>
+            <Label Grid.Column="1"
+                   Text="{Binding Source={x:Reference this}, Path=Price}"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#5D4037"/>
+        </Grid>
+    </Frame>
+</ContentView>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    x:Class="XXpressoo.Popups.MyCustomPopup"
+    CloseWhenBackgroundIsClicked="True">
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+        <Frame BackgroundColor="White" CornerRadius="15" HasShadow="True" Padding="20">
+            <StackLayout Spacing="10">
+                <!-- Изображение -->
+                <Image x:Name="ItemImage" 
+                       Source="placeholder.png" 
+                       WidthRequest="120" 
+                       HeightRequest="120"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"/>
+
+                <!-- Заголовок -->
+                <Label x:Name="TitleLabel"
+                       Text="Заголовок"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Margin="0,10"/>
+
+                <!-- Описание -->
+                <Label x:Name="DescriptionLabel"
+                       Text="Описание товара..."
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalOptions="Center"
+                       Margin="0,5"/>
+
+                <!-- Счетчик количества -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10">
+                    <Button Text="-" Clicked="OnMinusClicked" BackgroundColor="#E0E0E0" TextColor="Black" WidthRequest="40"/>
+                    <Label x:Name="QuantityLabel" 
+                           Text="1" 
+                           FontSize="16" 
+                           HorizontalOptions="Center" 
+                           WidthRequest="40"/>
+                    <Button Text="+" Clicked="OnPlusClicked" BackgroundColor="#5D4037" TextColor="White" WidthRequest="40"/>
+                </StackLayout>
+
+                <!-- Кнопка добавления в корзину -->
+                <Button Text="Добавить в корзину"
+                        BackgroundColor="#FFA726"
+                        TextColor="White"
+                        CornerRadius="10"
+                        WidthRequest="200"
+                        HorizontalOptions="Center"
+                        Margin="0,15"
+                        Clicked="OnAddToCartClicked"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</popup:PopupPage>

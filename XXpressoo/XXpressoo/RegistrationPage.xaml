@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.RegistrationPage"
+             Title="Регистрация"
+             BackgroundColor="#D2B48C">
+    <!-- Светло-коричневый фон -->
+
+    <ContentPage.Content>
+        <ScrollView Padding="20">
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="30"
+                         WidthRequest="350"
+                         >
+
+                <!-- Логотип -->
+                <Image Source="https://cdn-icons-png.flaticon.com/128/3447/3447211.png"
+WidthRequest="80"
+HeightRequest="80"
+HorizontalOptions="Center"
+Aspect="AspectFit"
+x:Name="LogoImage"/>
+
+                <!-- Заголовок -->
+                <Label Text="XPresso"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       TextColor="#5D4037"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20"/>
+
+                <!-- Поле email с иконкой -->
+                <Frame BorderColor="#A1887F"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Padding="5"
+                       BackgroundColor="White">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Grid.Column="0"
+                               Source="email_icon.png"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1"
+                               x:Name="EmailEntry"
+                               Placeholder="Введите ваш email"
+                               Keyboard="Email"
+                               BackgroundColor="Transparent"
+                               TextColor="#5D4037"
+                               FontSize="16"
+                               HeightRequest="45"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               PlaceholderColor="#AAA"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Поле пароля с иконкой -->
+                <Frame BorderColor="#A1887F"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Padding="5"
+                       BackgroundColor="White">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Grid.Column="0"
+                               Source="password_icon.png"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1"
+                               x:Name="PasswordEntry"
+                               Placeholder="Введите пароль"
+                               IsPassword="True"
+                               BackgroundColor="Transparent"
+                               TextColor="#5D4037"
+                               FontSize="16"
+                               HeightRequest="45"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               PlaceholderColor="#AAA"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Кнопка регистрации -->
+                <Frame BorderColor="#A1887F"
+                       BackgroundColor="White"
+                       CornerRadius="20"
+                       HasShadow="True"
+                       Padding="0"
+                       Margin="0,20,0,0">
+                    <Button Text="Зарегистрироваться"
+                            BackgroundColor="Transparent"
+                            TextColor="#5D4037"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="50"
+                            CornerRadius="20"
+                            Clicked="OnRegisterClicked"/>
+                </Frame>
+
+                
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

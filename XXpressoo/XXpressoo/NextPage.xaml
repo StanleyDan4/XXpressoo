@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.NextPage"
+             Title="XPresso"
+             BackgroundColor="#D2B48C">
+
+    <ScrollView>
+
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center"
+                     Spacing="30"
+                     Margin="0, 30, 0, 30">
+
+            <!-- Логотип -->
+            <Image Source="https://cdn-icons-png.flaticon.com/128/3447/3447211.png"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"
+                   Aspect="AspectFit"
+                   x:Name="LogoImage"/>
+
+            <!-- Заголовок -->
+            <Label Text="XPresso"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="#5D4037"
+                   HorizontalOptions="Center"
+                   x:Name="TitleLabel"/>
+
+            <!-- Подзаголовок -->
+            <Label Text="Вкус настоящего кофе — в каждом глотке"
+                   FontSize="16"
+                   TextColor="#795548"
+                   HorizontalOptions="Center"
+                   x:Name="SubtitleLabel"/>
+
+            <!-- Кнопки -->
+            <StackLayout Spacing="20" HorizontalOptions="Center" x:Name="ButtonsLayout">
+                <Button Text="Регистрация"
+                        BackgroundColor="#5D4037"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        CornerRadius="25"
+                        WidthRequest="220"
+                        HeightRequest="50"
+                        x:Name="RegisterButton"
+                        Clicked="Button_Clicked"/>
+
+                <Button Text="Вход"
+                        BackgroundColor="Transparent"
+                        TextColor="#5D4037"
+                        BorderColor="#A1887F"
+                        BorderWidth="2"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        CornerRadius="25"
+                        WidthRequest="220"
+                        HeightRequest="50"
+                        x:Name="LoginButton"
+                        Clicked="OnAuthClicked"/>
+            </StackLayout>
+
+            <!-- Продолжить как гость -->
+            <Label Text="Продолжить как гость"
+                   TextColor="#B8A680"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   VerticalOptions="EndAndExpand"
+                   Margin="0, 10, 0, 30"
+                   x:Name="GuestLabel">
+                
+            </Label>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

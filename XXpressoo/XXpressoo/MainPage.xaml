@@ -1,0 +1,52 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.MainPage"
+             Title="Start Page"
+             BackgroundColor="#D2B48C">
+
+    <ScrollView Padding="20">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center"
+                     Spacing="50">
+
+            <!-- Иконка -->
+            <Image Source="https://cdn-icons-png.flaticon.com/128/3447/3447211.png"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"
+                   Aspect="AspectFit"/>
+
+            <!-- Заголовок -->
+            <StackLayout Spacing="10" 
+                         HorizontalOptions="Center">
+
+                <Label Text="Добро пожаловать!"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="XPresso"
+                       FontSize="40"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!-- Кнопка -->
+            <Button Text="НАЧАТЬ"
+                    BackgroundColor="White"
+                    TextColor="#5D4037" 
+                    BorderColor="#A1887F"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    CornerRadius="25"
+                    WidthRequest="220"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    Margin="0,50,0,0"
+                    Clicked="Button_Clicked_1"/>
+
+        </StackLayout>
+    </ScrollView>
+    </ContentPage>

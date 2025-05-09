@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.MenuPage"
+             xmlns:local="clr-namespace:XXpressoo"
+             Title="Меню">
+    <ContentPage.Resources>
+        <Style TargetType="Button" x:Key="AddToCartButtonStyle">
+            <Setter Property="Text" Value="+"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="#5D4037"/>
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="MenuItemNameLabelStyle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="MenuItemPriceLabelStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="#9E9E9E"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="20">
+        <!-- Заголовок -->
+        <Label Text="XPresso"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20"/>
+
+        <!-- Вкладки -->
+        <FlexLayout Direction="Row" JustifyContent="Center">
+            <Button x:Name="DrinksButton"
+                    Text="Напитки"
+                    BackgroundColor="#5D4037"
+                    TextColor="White"
+                    CornerRadius="20"
+                    WidthRequest="120"
+                    HeightRequest="40"
+                    FontAttributes="Bold"
+                    Clicked="OnCategoryChanged"/>
+            <Button x:Name="FoodButton"
+                    Text="Еда"
+                    BackgroundColor="Transparent"
+                    TextColor="#5D4037"
+                    CornerRadius="20"
+                    WidthRequest="120"
+                    HeightRequest="40"
+                    Margin="10,0,0,0"
+                    BorderColor="#5D4037"
+                    BorderWidth="1"
+                    FontAttributes="Bold"
+                    Clicked="OnCategoryChanged"/>
+        </FlexLayout>
+
+        <!-- Список товаров -->
+        <ScrollView Margin="0,20,0,0">
+            <StackLayout>
+                <StackLayout x:Name="DrinksContent" IsVisible="True">
+                    <StackLayout Spacing="15" Padding="20">
+                        <Label Text="Классические" FontSize="16" TextColor="#795548" FontAttributes="Bold"/>
+                        <BoxView HeightRequest="1" BackgroundColor="#D7CCC8"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout x:Name="FoodContent" IsVisible="False">
+                    <StackLayout Spacing="15" Padding="20">
+                        <Label Text="Еда" FontSize="16" TextColor="#795548" FontAttributes="Bold"/>
+                        <BoxView HeightRequest="1" BackgroundColor="#D7CCC8"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

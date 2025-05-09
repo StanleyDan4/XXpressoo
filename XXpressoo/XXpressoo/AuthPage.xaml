@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.AuthPage"
+             BackgroundColor="#D2B48C">
+
+    <ScrollView Padding="20">
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Spacing="40"
+                     WidthRequest="350">
+
+            <!-- Иконка -->
+            <Image Source="https://cdn-icons-png.flaticon.com/128/3447/3447211.png"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"
+                   Aspect="AspectFit"
+                   x:Name="LogoImage"/>
+
+            <!-- Заголовок -->
+            <Label Text="XPresso"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="#5D4037"
+                   HorizontalOptions="Center"
+                   x:Name="TitleLabel"/>
+
+            <!-- Подзаголовок -->
+            <Label Text="Регистрация нового пользователя"
+                   FontSize="16"
+                   TextColor="#795548"
+                   HorizontalOptions="Center"
+                   x:Name="SubtitleLabel"/>
+
+            <!-- Форма регистрации -->
+            <StackLayout Spacing="20" x:Name="FormLayout">
+
+                <!-- Email -->
+                <StackLayout Spacing="5">
+                    <Label Text="Email"
+                           FontSize="14"
+                           TextColor="#5D4037"/>
+                    <Frame BorderColor="#A1887F"
+                           CornerRadius="8"
+                           HasShadow="False"
+                           Padding="0"
+                           Margin="0"
+                           BackgroundColor="White">
+                        <Entry Placeholder="Введите ваш email"
+                               Keyboard="Email"
+                               BackgroundColor="White"
+                               TextColor="#5D4037"
+                               HeightRequest="45"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Пароль -->
+                <StackLayout Spacing="5">
+                    <Label Text="Пароль"
+                           FontSize="14"
+                           TextColor="#5D4037"/>
+                    <Frame BorderColor="#A1887F"
+                           CornerRadius="8"
+                           HasShadow="False"
+                           Padding="0"
+                           Margin="0"
+                           BackgroundColor="White">
+                        <Entry Placeholder="Введите пароль"
+                               IsPassword="True"
+                               BackgroundColor="White"
+                               TextColor="#5D4037"
+                               HeightRequest="45"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Кнопка Регистрации -->
+                <Frame BorderColor="#A1887F"
+                       BackgroundColor="White"
+                       CornerRadius="20"
+                       HasShadow="True"
+                       Padding="0"
+                       Margin="0,20,0,0">
+                    <Button Text="Зарегистрироваться"
+                            BackgroundColor="Transparent"
+                            TextColor="#5D4037"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="50"
+                            CornerRadius="20"
+                            Clicked="OnAuthClicked"/>
+                </Frame>
+
+                <!-- Текст "Продолжить как гость" -->
+                <Label Text="Продолжить как гость"
+                       TextColor="#B8A680"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       VerticalOptions="EndAndExpand"
+                       Margin="0, 10, 0, 30">
+                </Label>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
