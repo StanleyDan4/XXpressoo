@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Xpressoo.Models;
-
 using XXpressooo.Data;
-using XXpressooo.Dtos;
+using Xpressoo.Models;
+using XXpressoo.Models.Dtos;
 
-namespace XXpressoo.Api.Controllers
+namespace XXpressooo.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,7 +17,27 @@ namespace XXpressoo.Api.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
+
+            if (user == null)
+                return NotFound(new { success = false, message = "Пользователь не найден" });
+
+            if (user.Password != dto.Password) // ⚠️ Только для тестирования! Используйте хэширование!
+                return Unauthorized(new { success = false, message = "Неверный пароль" });
+
+            return Ok(user);
+        }
+
+        public class LoginDto
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+        }
+
+        // POST /api/users
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] UserDto dto)
         {
@@ -37,52 +56,104 @@ namespace XXpressoo.Api.Controllers
                 return Conflict(new
                 {
                     success = false,
-                    message = "Email уже используется"
+                    message = "Пользователь с таким email уже существует"
                 });
+            }
+
+            var user = new User
+            {
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Password = dto.Password
+            };
+
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                success = true,
+                userId = user.UserId
+            });
+        }
+
+        // GET /api/users/exists?email=...
+        [HttpGet("exists")]
+        public async Task<IActionResult> CheckEmailExists(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Email не указан"
+                });
+            }
+
+            bool exists = await _context.Users.AnyAsync(u => u.Email == email);
+            return Ok(new
+            {
+                success = true,
+                exists
+            });
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDto dto)
+        {
+            if (dto == null || !ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Некорректные данные"
+                });
+            }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound(new
+                {
+                    success = false,
+                    message = "Пользователь не найден"
+                });
+            }
+
+            // Обновляем только разрешенные поля
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
+
+            // Пароль обновляем только если он предоставлен
+            if (!string.IsNullOrEmpty(dto.Password))
+            {
+                user.Password = dto.Password; // В реальном приложении здесь должно быть хеширование
             }
 
             try
             {
-                var user = new User
-                {
-                    Email = dto.Email,
-                    FirstName = dto.FirstName,
-                    LastName = dto.LastName,
-                    Password = dto.Password,
-                    
-                };
-
-                await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-
                 return Ok(new
                 {
                     success = true,
-                    userId = user.UserId,
+                    user = new
+                    {
+                        user.UserId,
+                        user.Email,
+                        user.FirstName,
+                        user.LastName
+                        // Не возвращаем пароль
+                    }
                 });
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                return StatusCode(500, new
+                return Conflict(new
                 {
                     success = false,
-                    message = "Внутренняя ошибка сервера",
-                    detail = ex.Message
+                    message = "Ошибка при обновлении данных"
                 });
             }
-        }
-
-        [HttpGet("exists")]
-        public async Task<IActionResult> CheckEmailExists(string email)
-        {
-            bool exists = await _context.Users.AnyAsync(u => u.Email == email);
-            return Ok(exists);
-        }
-
-        private string HashPassword(string password)
-        {
-            // В будущем замените на BCrypt / IdentityHasher
-            return password;
         }
     }
 }

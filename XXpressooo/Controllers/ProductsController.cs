@@ -15,16 +15,13 @@ namespace XXpressooo.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllProducts()
         {
-            return Ok(await _context.Products.ToListAsync());
-        }
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            return product == null ? NotFound() : Ok(product);
+            return Ok(products);
         }
     }
 }

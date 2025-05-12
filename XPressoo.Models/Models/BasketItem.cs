@@ -8,10 +8,6 @@
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
 
-        public BasketItem()
-        {
-            Name = string.Empty;
-            ImageUrl = string.Empty;
-        }
+        
     }
 }

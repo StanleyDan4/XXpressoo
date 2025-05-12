@@ -91,7 +91,11 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\drawable\empty.png" />
+    <Content Include="Resources\drawable\Star_empty.png" />
+    <Content Include="Resources\drawable\Star.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XXpressoo\XXpressoo.csproj">
       <Project>{1532C706-B7F6-4C40-973E-8C5D5C87070A}</Project>

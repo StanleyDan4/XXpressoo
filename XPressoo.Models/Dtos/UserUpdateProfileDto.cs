@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Xpressoo.Models
+namespace XPressoo.Models.Dtos
 {
-    public class User
+    public class UserUpdateProfileDto
     {
-        public int UserId { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Password { get; set; }
     }
 }

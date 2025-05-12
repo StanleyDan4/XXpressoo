@@ -25,12 +25,13 @@
                            BackgroundColor="NavajoWhite"
                         HeightRequest="60">
                         <Grid ColumnDefinitions="Auto,*">
-                            <Image Source="https://cdn-icons-png.flaticon.com/128/1946/1946429.png"
+                            <ImageButton Source="https://cdn-icons-png.flaticon.com/128/1946/1946429.png"
                                    WidthRequest="30"
                                    HeightRequest="30"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Start"
-                                   Margin="10,0,0,0"/>
+                                   Margin="10,0,0,0"
+                                         Clicked="ImageButton_Clicked"/>
                             <Label Grid.Column="1"
                                    Text="Мои данные"
                                    FontSize="18"
@@ -63,25 +64,28 @@
                         </Grid>
                     </Frame>
 
-                    <Frame CornerRadius="10"
-                           HasShadow="True"
-                           Padding="10"
-                           BackgroundColor="NavajoWhite"
-                           HeightRequest="60">
+                    <Frame x:Name="NotificationsFrame"
+       CornerRadius="10"
+       HasShadow="True"
+       Padding="10"
+       BackgroundColor="#E53935"
+                        HeightRequest="60">
                         <Grid ColumnDefinitions="Auto,*">
-                            <Image Source="https://cdn-icons-png.flaticon.com/128/3239/3239952.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start"
-                                   Margin="10,0,0,0"/>
+                            <ImageButton x:Name="Imaggg"
+                                         Clicked="Imaggg_Clicked"
+                                Source="https://cdn-icons-png.flaticon.com/128/3239/3239952.png "
+               WidthRequest="30"
+               HeightRequest="30"
+               VerticalOptions="Center"
+               HorizontalOptions="Start"
+               Margin="10,0,0,0"/>
                             <Label Grid.Column="1"
-                                   Text="Уведомления"
-                                   FontSize="18"
-                                   TextColor="White"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start"
-                                   Margin="10,0,0,0"/>
+               Text="Уведомления"
+               FontSize="18"
+               TextColor="White"
+               VerticalOptions="Center"
+               HorizontalOptions="Start"
+               Margin="10,0,0,0"/>
                         </Grid>
                     </Frame>
 
@@ -91,12 +95,13 @@
                            BackgroundColor="NavajoWhite"
                            HeightRequest="60">
                         <Grid ColumnDefinitions="Auto,*">
-                            <Image Source="https://cdn-icons-png.flaticon.com/128/126/126482.png"
+                            <ImageButton Source="https://cdn-icons-png.flaticon.com/128/126/126482.png"
                                    WidthRequest="30"
                                    HeightRequest="30"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Start"
-                                   Margin="10,0,0,0"/>
+                                   Margin="10,0,0,0"
+                                         Clicked="OnRateAppClicked"/>
                             <Label Grid.Column="1"
                                    Text="Оценить приложение"
                                    FontSize="18"
@@ -133,8 +138,8 @@
              Padding="0"
              Margin="0,0,0,5">
 
-                    <!-- Иконка "Главная" -->
-                    <ImageButton Source="https://cdn-icons-png.flaticon.com/128/7133/7133312.png"
+                        <!-- Иконка "Главная" -->
+                        <ImageButton Source="https://cdn-icons-png.flaticon.com/128/7133/7133312.png"
                   WidthRequest="50"
                   HeightRequest="50"
                   HorizontalOptions="CenterAndExpand"
@@ -142,8 +147,8 @@
                   BackgroundColor="Transparent"
                   Clicked="OnHomeClicked"/>
 
-                    <!-- Иконка "Меню" -->
-                    <ImageButton Source="https://cdn-icons-png.flaticon.com/128/747/747327.png"
+                        <!-- Иконка "Меню" -->
+                        <ImageButton Source="https://cdn-icons-png.flaticon.com/128/747/747327.png"
                   WidthRequest="40"
                   HeightRequest="40"
                   HorizontalOptions="CenterAndExpand"
@@ -151,8 +156,8 @@
                   BackgroundColor="Transparent"
                   Clicked="OnMenuClicked"/>
 
-                    <!-- Иконка "Заказ" (центральная) -->
-                    <ImageButton Source="https://cdn-icons-png.flaticon.com/128/1008/1008010.png"
+                        <!-- Иконка "Заказ" (центральная) -->
+                        <ImageButton Source="https://cdn-icons-png.flaticon.com/128/1008/1008010.png"
                   WidthRequest="60"
                   HeightRequest="60"
                   HorizontalOptions="CenterAndExpand"
@@ -163,8 +168,8 @@
                  Padding="10"
                   Clicked="OnOrderClicked"/>
 
-                    <!-- Иконка "Профиль" -->
-                    <ImageButton Source="https://cdn-icons-png.flaticon.com/128/1144/1144760.png"
+                        <!-- Иконка "Профиль" -->
+                        <ImageButton Source="https://cdn-icons-png.flaticon.com/128/1144/1144760.png"
                   WidthRequest="40"
                   HeightRequest="40"
                   HorizontalOptions="CenterAndExpand"
@@ -172,18 +177,18 @@
                   BackgroundColor="Transparent"
                   Clicked="OnProfileClicked"/>
 
-                    <!-- Иконка "Корзина" -->
-                    <ImageButton Source="https://cdn-icons-png.flaticon.com/128/711/711897.png"
+                        <!-- Иконка "Корзина" -->
+                        <ImageButton Source="https://cdn-icons-png.flaticon.com/128/711/711897.png"
                   WidthRequest="40"
                   HeightRequest="40"
                   HorizontalOptions="CenterAndExpand"
                   VerticalOptions="Center"
                   BackgroundColor="Transparent"
                   Clicked="OnCartClicked"/>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-            </Frame>
-            </StackLayout>
-                
+
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

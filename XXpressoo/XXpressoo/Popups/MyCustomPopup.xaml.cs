@@ -2,6 +2,7 @@
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using Xpressoo.Models;
 
 namespace XXpressoo.Popups
 {
@@ -15,29 +16,14 @@ namespace XXpressoo.Popups
 
             TitleLabel.Text = title;
             DescriptionLabel.Text = description;
-            ItemImage.Source = ImageSource.FromFile(imageUrl);
-            QuantityLabel.Text = _quantity.ToString();
+            ItemImage.Source = ImageSource.FromUri(new Uri(imageUrl));
+            
         }
 
-        private void OnMinusClicked(object sender, EventArgs e)
-        {
-            if (_quantity > 1)
-            {
-                _quantity--;
-                QuantityLabel.Text = _quantity.ToString();
-            }
-        }
+      
 
-        private void OnPlusClicked(object sender, EventArgs e)
-        {
-            _quantity++;
-            QuantityLabel.Text = _quantity.ToString();
-        }
+        
 
-        private async void OnAddToCartClicked(object sender, EventArgs e)
-        {
-            await DisplayAlert("Корзина", $"{TitleLabel.Text} × {_quantity} шт.", "ОК");
-            await PopupNavigation.Instance.PopAsync();
-        }
+      
     }
 }

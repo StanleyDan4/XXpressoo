@@ -2,80 +2,131 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XXpressoo.MenuPage"
-             xmlns:local="clr-namespace:XXpressoo"
-             Title="Меню">
+             BackgroundColor="#D2B48C">
+
     <ContentPage.Resources>
+        <!-- Стили -->
+        <Style TargetType="Button" x:Key="CategoryButtonStyle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="#8D6E63"/>
+            <Setter Property="BackgroundColor" Value="#D2B48C"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="#A1887F"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="ProductTitleStyle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="#5D4037"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="ProductPriceStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="#8D6E63"/>
+        </Style>
+
         <Style TargetType="Button" x:Key="AddToCartButtonStyle">
             <Setter Property="Text" Value="+"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="TextColor" Value="#5D4037"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="#A1887F"/>
             <Setter Property="WidthRequest" Value="40"/>
             <Setter Property="HeightRequest" Value="40"/>
-        </Style>
-
-        <Style TargetType="Label" x:Key="MenuItemNameLabelStyle">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-        </Style>
-
-        <Style TargetType="Label" x:Key="MenuItemPriceLabelStyle">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="TextColor" Value="#9E9E9E"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
         </Style>
     </ContentPage.Resources>
 
-    <StackLayout Padding="20">
-        <!-- Заголовок -->
-        <Label Text="XPresso"
-               FontSize="32"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               Margin="0,20"/>
+    <!-- Единственный корневой элемент -->
+    <ScrollView Padding="0" Margin="0">
+        <StackLayout>
 
-        <!-- Вкладки -->
-        <FlexLayout Direction="Row" JustifyContent="Center">
-            <Button x:Name="DrinksButton"
-                    Text="Напитки"
-                    BackgroundColor="#5D4037"
-                    TextColor="White"
-                    CornerRadius="20"
-                    WidthRequest="120"
-                    HeightRequest="40"
-                    FontAttributes="Bold"
-                    Clicked="OnCategoryChanged"/>
-            <Button x:Name="FoodButton"
-                    Text="Еда"
-                    BackgroundColor="Transparent"
-                    TextColor="#5D4037"
-                    CornerRadius="20"
-                    WidthRequest="120"
-                    HeightRequest="40"
-                    Margin="10,0,0,0"
-                    BorderColor="#5D4037"
-                    BorderWidth="1"
-                    FontAttributes="Bold"
-                    Clicked="OnCategoryChanged"/>
-        </FlexLayout>
+            <!-- Кнопки выбора категории -->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Margin="0,20,0,10">
+                <Button x:Name="DrinksButton"
+                        Text="Напитки"
+                        Clicked="OnCategoryChanged"
+                        Style="{StaticResource CategoryButtonStyle}"/>
 
-        <!-- Список товаров -->
-        <ScrollView Margin="0,20,0,0">
-            <StackLayout>
-                <StackLayout x:Name="DrinksContent" IsVisible="True">
-                    <StackLayout Spacing="15" Padding="20">
-                        <Label Text="Классические" FontSize="16" TextColor="#795548" FontAttributes="Bold"/>
-                        <BoxView HeightRequest="1" BackgroundColor="#D7CCC8"/>
-                    </StackLayout>
-                </StackLayout>
-
-                <StackLayout x:Name="FoodContent" IsVisible="False">
-                    <StackLayout Spacing="15" Padding="20">
-                        <Label Text="Еда" FontSize="16" TextColor="#795548" FontAttributes="Bold"/>
-                        <BoxView HeightRequest="1" BackgroundColor="#D7CCC8"/>
-                    </StackLayout>
-                </StackLayout>
+                <Button x:Name="FoodButton"
+                        Text="Еда"
+                        Clicked="OnCategoryChanged"
+                        Margin="10,0"
+                        Style="{StaticResource CategoryButtonStyle}"/>
             </StackLayout>
-        </ScrollView>
-    </StackLayout>
+
+            <!-- Заголовок категории -->
+            <Label x:Name="CategoryTitle"
+                   Text="Напитки"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   TextColor="#5D4037"
+                   Margin="0,0,0,10"/>
+
+            <!-- Список товаров -->
+            <CollectionView x:Name="ProductsCollection"
+                             ItemsSource="{Binding}"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             Margin="0"
+                             >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="NavajoWhite"
+                               Margin="0,5"
+                               HasShadow="True">
+                            <Grid ColumnDefinitions="Auto,*,Auto"
+                                  RowDefinitions="Auto,Auto"
+                                  RowSpacing="5"
+                                  ColumnSpacing="10">
+                                <!-- Фото -->
+                                <Image Source="{Binding Image}" 
+                                       WidthRequest="60"
+                                       HeightRequest="60"
+                                       Aspect="AspectFit"
+                                       Grid.RowSpan="2" />
+
+                                <!-- Название -->
+                                <Label Text="{Binding ProductName}"
+                                       Style="{StaticResource ProductTitleStyle}"
+                                       Grid.Column="1"
+                                       Grid.Row="0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnProductNameTapped" CommandParameter="{Binding}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <!-- Цена -->
+                                <Label Text="{Binding Price, StringFormat='{0} руб.'}"
+                                       Style="{StaticResource ProductPriceStyle}"
+                                       Grid.Column="1"
+                                       Grid.Row="1"/>
+
+                                <!-- Кнопка + -->
+                                <Button Text="+" 
+                                        CommandParameter="{Binding ProductId}"
+                                        
+                                        Grid.Column="2"
+                                        Grid.Row="0"
+                                        Clicked="OnAddToCartClicked"
+                                        VerticalOptions="Start"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

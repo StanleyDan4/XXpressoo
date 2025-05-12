@@ -27,7 +27,7 @@
                    x:Name="TitleLabel"/>
 
             <!-- Подзаголовок -->
-            <Label Text="Регистрация нового пользователя"
+            <Label Text="Авторизация пользователя"
                    FontSize="16"
                    TextColor="#795548"
                    HorizontalOptions="Center"
@@ -47,7 +47,8 @@
                            Padding="0"
                            Margin="0"
                            BackgroundColor="White">
-                        <Entry Placeholder="Введите ваш email"
+                        <Entry x:Name="EmailEntry"
+                            Placeholder="Введите ваш email"
                                Keyboard="Email"
                                BackgroundColor="White"
                                TextColor="#5D4037"
@@ -67,7 +68,8 @@
                            Padding="0"
                            Margin="0"
                            BackgroundColor="White">
-                        <Entry Placeholder="Введите пароль"
+                        <Entry x:Name="PasswordEntry"
+                            Placeholder="Введите пароль"
                                IsPassword="True"
                                BackgroundColor="White"
                                TextColor="#5D4037"
@@ -83,24 +85,17 @@
                        HasShadow="True"
                        Padding="0"
                        Margin="0,20,0,0">
-                    <Button Text="Зарегистрироваться"
+                    <Button Text="Войти"
                             BackgroundColor="Transparent"
                             TextColor="#5D4037"
                             FontAttributes="Bold"
                             FontSize="18"
                             HeightRequest="50"
                             CornerRadius="20"
-                            Clicked="OnAuthClicked"/>
+                            Clicked="OnLoginClicked"/>
                 </Frame>
 
-                <!-- Текст "Продолжить как гость" -->
-                <Label Text="Продолжить как гость"
-                       TextColor="#B8A680"
-                       FontSize="14"
-                       HorizontalOptions="Center"
-                       VerticalOptions="EndAndExpand"
-                       Margin="0, 10, 0, 30">
-                </Label>
+               
 
             </StackLayout>
 

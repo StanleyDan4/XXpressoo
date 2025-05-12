@@ -13,7 +13,7 @@ namespace XXpressoo
         // Глобальная корзина
         public static List<BasketItem> Cart { get; set; } = new();
         public static ApiService Api { get; } = new ApiService();
-        public static int CartUserId = 1;
+         public static int CartUserId { get; set; } = -1;
 
         public App()
         {

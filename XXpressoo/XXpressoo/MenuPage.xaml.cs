@@ -7,6 +7,7 @@ using XXpressoo.Services;
 using Rg.Plugins.Popup.Services;
 using Xpressoo.Models;
 using XXpressoo.Popups;
+using XPressoo.Models.Dtos;
 
 namespace XXpressoo
 {
@@ -15,115 +16,100 @@ namespace XXpressoo
         private List<Product> AllProducts = new();
         private List<Product> DrinksList = new();
         private List<Product> FoodList = new();
-
+        public int _userId;
+         
         public MenuPage()
         {
             InitializeComponent();
             LoadProductsFromApi();
+            
+          
         }
 
         private async void LoadProductsFromApi()
         {
-            var api = new ApiService();
-            //AllProducts = await api.GetProductsAsync();
+            
+            try
+            {
+                // Загружаем все продукты
+                AllProducts = await App.Api.GetProductsAsync();
 
-            DrinksList = AllProducts.Where(p => p.CategoryId == 1 || p.CategoryId == 2).ToList(); // напитки
-            FoodList = AllProducts.Where(p => p.CategoryId == 3 || p.CategoryId == 4 || p.CategoryId == 5).ToList(); // еда
+                // Разделяем по категориям
+                DrinksList = AllProducts
+                    .Where(p => p.CategoryId == 1 || p.CategoryId == 2)
+                    .ToList();
 
-            ShowDrinks();
+                FoodList = AllProducts
+                    .Where(p => p.CategoryId == 3 || p.CategoryId == 4 || p.CategoryId == 5)
+                    .ToList();
+
+                ShowDrinks(); // По умолчанию показываем напитки
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Не удалось загрузить товары: {ex.Message}", "ОК");
+            }
         }
 
         private void ShowDrinks()
         {
-            DrinksContent.Children.Clear();
-            foreach (var product in DrinksList)
-            {
-                DrinksContent.Children.Add(CreateProductGrid(product));
-            }
-
-            DrinksButton.BackgroundColor = Color.FromHex("#5D4037");
-            DrinksButton.TextColor = Color.White;
-            FoodButton.BackgroundColor = Color.Transparent;
-            FoodButton.TextColor = Color.FromHex("#5D4037");
+            ProductsCollection.ItemsSource = DrinksList;
+            CategoryTitle.Text = "Напитки";
+            SetActiveButton(DrinksButton);
         }
 
         private void ShowFood()
         {
-            FoodContent.Children.Clear();
-            foreach (var product in FoodList)
-            {
-                FoodContent.Children.Add(CreateProductGrid(product));
-            }
-
-            FoodButton.BackgroundColor = Color.FromHex("#5D4037");
-            FoodButton.TextColor = Color.White;
-            DrinksButton.BackgroundColor = Color.Transparent;
-            DrinksButton.TextColor = Color.FromHex("#5D4037");
+            ProductsCollection.ItemsSource = FoodList;
+            CategoryTitle.Text = "Еда";
+            SetActiveButton(FoodButton);
         }
-
-        private Grid CreateProductGrid(Product product)
+        private async void OnProductNameTapped(object sender, EventArgs e)
         {
-            var grid = new Grid
-            {
-                Padding = new Thickness(0, 5),
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = GridLength.Auto }
-                }
-            };
+            var label = sender as Label;
+            var product = label?.BindingContext as Product;
 
-            var nameLabel = new Label
-            {
-                Text = product.ProductName,
-                Style = (Style)Resources["MenuItemNameLabelStyle"]
-            };
-            var tapRecognizer = new TapGestureRecognizer();
-            tapRecognizer.Tapped += async (s, e) =>
+            if (product != null)
             {
                 await PopupNavigation.Instance.PushAsync(new MyCustomPopup(
                     product.ProductName,
                     product.Description,
                     product.Image ?? "placeholder.png"));
-            };
-            nameLabel.GestureRecognizers.Add(tapRecognizer);
-            nameLabel.GestureRecognizers.Add(tapRecognizer);
+            }
+        }
+        private async void OnAddToCartClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var productId = Convert.ToInt32(button?.CommandParameter);
 
-            var priceLabel = new Label
+            try
             {
-                Text = $"{product.Price} руб.",
-                Style = (Style)Resources["MenuItemPriceLabelStyle"]
-            };
-
-            var stackLayout = new StackLayout
+                await App.Api.AddToCartAsync(App.CartUserId, productId);
+                await DisplayAlert("Корзина", $"{(button?.BindingContext as Product)?.ProductName} добавлен(а)", "ОК");
+            }
+            catch (Exception ex)
             {
-                Orientation = StackOrientation.Vertical,
-                Children = { nameLabel, priceLabel }
-            };
+                await DisplayAlert("Ошибка", $"Не удалось добавить в корзину: {ex.Message}", "ОК");
+            }
+        }
 
-            var cartButton = new Button
-            {
-                Style = (Style)Resources["AddToCartButtonStyle"],
-                CommandParameter = product.ProductId
-            };
-            cartButton.Clicked += async (s, e) =>
-            {
-                var productId = Convert.ToInt32(cartButton.CommandParameter);
-                //await App.Database.AddToCartAsync(App.CartUserId, productId);
-                await DisplayAlert("Корзина", $"{product.ProductName} добавлен(а)", "ОК");
-            };
+        private void SetActiveButton(Button activeButton)
+        {
+            DrinksButton.BackgroundColor = Color.Transparent;
+            DrinksButton.TextColor = Color.FromHex("#5D4037");
 
-            grid.Children.Add(stackLayout);
-            grid.Children.Add(cartButton, 1, 0);
+            FoodButton.BackgroundColor = Color.Transparent;
+            FoodButton.TextColor = Color.FromHex("#5D4037");
 
-            return grid;
+            activeButton.BackgroundColor = Color.FromHex("#5D4037");
+            activeButton.TextColor = Color.White;
         }
 
         private void OnCategoryChanged(object sender, EventArgs e)
         {
-            if (sender == DrinksButton)
+            if (sender == DrinksButton && DrinksButton.BackgroundColor != Color.FromHex("#5D4037"))
                 ShowDrinks();
-            else
+            else if (sender == FoodButton && FoodButton.BackgroundColor != Color.FromHex("#5D4037"))
                 ShowFood();
         }
     }

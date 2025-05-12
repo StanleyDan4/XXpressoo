@@ -14,6 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Resources\empty.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
     <PackageReference Include="MySql.Data" Version="9.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -59,7 +63,13 @@
     <EmbeddedResource Update="NextPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="ProfileMax.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="RatingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="RegistrationPage.xaml">

@@ -1,4 +1,4 @@
-﻿namespace XXpressooo.Dtos
+﻿namespace XXpressoo.Models.Dtos
 {
     public class UserDto
     {

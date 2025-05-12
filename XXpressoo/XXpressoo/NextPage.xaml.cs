@@ -11,6 +11,7 @@ namespace XXpressoo
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NextPage : ContentPage
     {
+        
         public NextPage()
         {
             InitializeComponent();

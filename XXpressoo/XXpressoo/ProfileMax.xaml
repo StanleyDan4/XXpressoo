@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XXpressoo.ProfileMax"
+                          BackgroundColor="#D2B48C">
+
+    <!-- светло-бежевый фон -->
+
+        <StackLayout Padding="20" Spacing="15">
+
+            <!-- Поле Имя -->
+            <Entry x:Name="Namet" 
+                Placeholder="Имя"
+               TextColor="#3b322c"
+               PlaceholderColor="#a79277"
+               BackgroundColor="#e0d7d1"
+               Margin="0,5"/>
+
+            <!-- Поле Фамилия -->
+            <Entry x:Name="Surnamet"
+                Placeholder="Фамилия"
+               TextColor="#3b322c"
+               PlaceholderColor="#a79277"
+               BackgroundColor="#e0d7d1"
+               Margin="0,5"/>
+
+            <!-- Поле Почта -->
+            <Entry x:Name="Mailt"
+                Placeholder="Почта"
+               TextColor="#3b322c"
+               PlaceholderColor="#a79277"
+               BackgroundColor="#e0d7d1"
+               Keyboard="Email"
+               Margin="0,5"
+                   IsReadOnly="True"/>
+        <!-- Поле Пароля -->
+        <Entry x:Name="Passwordt"
+    Placeholder="Пароль"
+   TextColor="#3b322c"
+   PlaceholderColor="#a79277"
+   BackgroundColor="#e0d7d1"
+   Margin="0,5"
+               IsReadOnly="True"/>
+
+        <!-- Кнопка подтверждения -->
+            <Button x:Name="btnt"
+                Text="Подтвердить"
+                BackgroundColor="#c7b7a3"
+                TextColor="White"
+                CornerRadius="20"
+                HeightRequest="45"
+                Margin="0,15"
+                    Clicked="OnConfirmClicked"/>
+        </StackLayout>
+  
+</ContentPage>
